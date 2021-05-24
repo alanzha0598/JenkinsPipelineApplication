@@ -169,20 +169,4 @@ resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
   alarm_actions     = ["${aws_autoscaling_policy.scale_down.arn}"]
 }
 
-resource "aws_instance" "bastion" {
-  ami                         = "${data.aws_ami.aws_linux.id}"
-  instance_type               = var.asg_instance_size
-  subnet_id                   = "${element(data.terraform_remote_state.networking.outputs.public_subnets,0)}"
-  associate_public_ip_address = true
-  vpc_security_group_ids      = ["${aws_security_group.bastion_ssh_sg.id}"]
-  key_name                    = "${var.key_name}"
-
-  tags = "${merge(
-    local.common_tags,
-    map(
-      "Name", "ddt_bastion_host",
-    )
-  )}"
-}
-
 
