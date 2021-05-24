@@ -46,11 +46,3 @@ data "aws_ami" "aws_linux" {
   }
 }
 
-
-data "aws_instances" "workers" {
-  instance_state_names = ["running", "stopped"]
-  
-  instance_tags = {
-    environment = "development"
-  }
-}
