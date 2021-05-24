@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('GitClone') {
           steps {
-            git url: 'https://github.com/alanzha0598/JenkinsPipelineApplicationPublic.git', branch: 'main'
+            git url: 'https://github.com/alanzha0598/JenkinsPipelineApplication.git', branch: 'main'
             sh "echo \$PWD"
           }
         }
