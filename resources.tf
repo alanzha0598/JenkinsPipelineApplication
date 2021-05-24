@@ -73,8 +73,16 @@ resource "aws_autoscaling_group" "webapp_asg" {
   launch_configuration  = "${aws_launch_configuration.webapp_lc.id}"
   load_balancers        = ["${aws_elb.webapp_elb.name}"]
 
-  #tags = merge(local.common_tags)
-  tags = "${local.common_tags}"
+  tags = ["${
+    list(
+      map("key", "Name", "value", "ddt_webapp_asg", "propagate_at_launch", true),
+      map("key", "environment", "value", "development", "propagate_at_launch", true),
+      map("key", "billing_code", "value", "342647563", "propagate_at_launch", true),
+      map("key", "project_code", "value", "8675309", "propagate_at_launch", true),
+      map("key", "network_lead", "value", "Mary Moe", "propagate_at_launch", true),
+      map("key", "application_lead", "value", "Sally Sue", "propagate_at_launch", true)
+    )
+  }"]
 }
 
 #
