@@ -5,7 +5,7 @@ resource "local_file" "private_key" {
 }
 resource "local_file" "ansible_inventory" {
   content = templatefile("inventory.tmpl", {
-      ip          = data.aws_instances.workers.public_ip,
+      ip          = data.aws_instances.workers.public_ips,
       ssh_keyfile = local_file.private_key.filename
   })
   filename = "inventory.yaml"
